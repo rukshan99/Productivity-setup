@@ -1,7 +1,7 @@
 #!/bin/sh
 install_git() {
-	LOG_PATH=$1
-	update=$(sudo apt update)
+	local LOG_PATH=$1
+	local update=$(sudo apt update)
 	echo $update > $LOG_PATH
 	echo $update
 }
