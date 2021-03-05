@@ -1,8 +1,8 @@
 #!/bin/sh
-install_git() {
+apt_update() {
 	local LOG_PATH=$1
-	local update=$(sudo apt update)
+	update=$(sudo apt update)
+	echo "DID A TEST" > "TEMP.txt"
 	echo $update > $LOG_PATH
-	echo $update
 }
-install_git "$@"
+apt_update "$@"
