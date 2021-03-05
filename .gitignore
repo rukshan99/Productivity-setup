@@ -1,0 +1,7 @@
+*src/logs/*
+*/src/logs/*
+*src/logs*
+*/src/logs*
+
+# git files
+/.metadata/
