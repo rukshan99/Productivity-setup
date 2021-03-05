@@ -1,9 +1,8 @@
 #!/bin/sh
 install_git() {
-	LOG_LOCATION=$1
-	LOG_PATH=$1"/install_git.txt"
+	LOG_PATH=$1
 	update=$(sudo apt update)
 	echo $update > $LOG_PATH
-	echo "done"
+	echo $update
 }
 install_git "$@"
