@@ -82,16 +82,3 @@ source test/helper.sh
 	TEST_RESULT=$(actual_result_has_any_allowed_result_in_head "$ACTUAL_RESULT")
 	assert_equal $(echo -n $TEST_RESULT | tail -c 5) "false"
 }
-
-# TODO: deal with only sending a list that contains subsets of eachother
-@test "Write tests that pass it only a list and assert the function returns false." {
-	ALLOWED_RESULTS=(
-		"this is an output"
-		"this is an output"
-		"another different output"
-    		"an extra different output"
-    		"this is an output"
-	)
-	TEST_RESULT=$(actual_result_has_any_allowed_result_in_head "${ALLOWED_RESULTS[@]}")
-	assert_equal $(echo -n $TEST_RESULT | tail -c 5) "false"
-}
