@@ -1,6 +1,6 @@
 # unit tested shell code template [![Build Status](https://travis-ci.org/a-t-0/Taskwarrior-installation.svg?branch=refactor_to_shell)](https://travis-ci.org/a-t-0/Taskwarrior-installation)
 
-## Usage: Installation
+## Usage: Installation (Currently only testing works)
 Install git and download this repository:
 ```
 sudo apt update
