@@ -33,7 +33,9 @@ actual_result_has_any_allowed_result_in_tail() {
 					# test if left string is in the tail of the allowed result string
 					# TODO: include contains option in separate function
 					temp_test_result=$(right_is_in_tail_of_left "$actual_result" "$allowed_result");
-					test_result=$(echo -n $temp_test_result | tail -c 4)
+					if [ $(echo -n $temp_test_result | tail -c 4) == true ]; then
+						test_result=true
+					fi
 				fi
 			fi
 		done
@@ -123,12 +125,14 @@ actual_result_contains_any_allowed_result() {
 					# test if left string is in the tail of the allowed result string
 					# TODO: include contains option in separate function
 					temp_test_result=$(left_contains_right "$actual_result" "$allowed_result");
-					test_result=$(echo -n $temp_test_result | tail -c 4)
+					if [ $(echo -n $temp_test_result | tail -c 4) == true ]; then
+						test_result=true
+					fi
 				fi
 			fi
 		done
 	fi
-		
+	
 	# Ensure the last 4/5 characters of the output of this function contains the true false evaluation.
 	echo $test_result
 }
