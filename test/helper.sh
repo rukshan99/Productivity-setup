@@ -10,7 +10,7 @@ is_allowed_result() {
 	# get the list of allowed results and list size
 	allowed_results=("$@") 
 	list_size=${#allowed_results}
-	
+
 	# Only engage this function if the list size is greater than 1
 	if [ $list_size -gt 1 ]; then echo "error";
 	
@@ -38,7 +38,7 @@ is_allowed_result() {
 			fi
 		done
 	fi
-	
+		
 	# Ensure the last 4/5 characters of the output of this function contains the true false evaluation.
 	echo $test_result
 }
