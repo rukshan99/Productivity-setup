@@ -55,3 +55,17 @@ source test/helper.sh
 	TEST_RESULT=$(equal_strings "$left" "$right")
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
 }
+
+@test "Test if the function returns true if the left string contains right string." {
+	left="Some string that does not contains a substring somewhere in the middle."
+	right="a substring that is not contained"
+	TEST_RESULT=$(left_contains_right "$left" "$right")
+	assert_equal $(echo -n $TEST_RESULT | tail -c 5) "false"
+}
+
+@test "Test if the function returns false if the left string does not contain right string." {
+	left="Some string that contains a substring somewhere in the middle."
+	right="a substring somewhere"
+	TEST_RESULT=$(left_contains_right "$left" "$right")
+	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
+}

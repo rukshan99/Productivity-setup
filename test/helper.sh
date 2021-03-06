@@ -181,9 +181,15 @@ equal_strings() {
 
 left_contains_right() {
 	# get the actual result
-	string=$1
-	actual_result=$1
-	allowed_size=$2
+	left=$1
+	right=$2
 	
 	# TODO: test if the two incoming strings are equal and return true if yes, false otherwise
+	if [[ $left == *"$right"* ]]; then
+		echo "It's in there!"
+		test_result=true
+	else
+		test_result=false
+	fi
+	echo $test_result
 }
