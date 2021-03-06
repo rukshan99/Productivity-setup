@@ -48,7 +48,7 @@ setup() {
         ALLOWED_RESULTS=("Reading package lists... Building dependency tree... Reading state information... All packages are up to date."
         	"packages can be upgraded. Run 'apt list --upgradable' to see them."
         )
-	TEST_RESULT=$(is_allowed_result "$LOG_CONTENT" "${ALLOWED_RESULTS[@]}")
+	TEST_RESULT=$(actual_result_has_any_allowed_result_in_tail "$LOG_CONTENT" "${ALLOWED_RESULTS[@]}")
 	echo "TEST_RESULT"
 	echo $TEST_RESULT
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
