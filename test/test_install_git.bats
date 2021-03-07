@@ -5,25 +5,9 @@ load 'libs/bats-assert/load'
 
 source test/helper.sh
 source src/hardcoded_variables.txt
+source src/helper.sh
 
 mkdir -p src/logs
-
-# Makes the main script runnable, removes the log file and runs main file.
-run_main_functions() {
-	local SCRIPT_NAME=$1	
-	SCRIPT_PATH=src/"$SCRIPT_NAME".sh
-	local LOG_PATH=$LOG_LOCATION"$SCRIPT_NAME".txt
-	
-	chmod +x $SCRIPT_PATH
-	
-	# Remove old log files if exist
-	if [ -f "$LOG_PATH" ] ; then
-	    rm "$LOG_PATH"
-	fi
-	
-	# run the function that updates apt
-	run ./$SCRIPT_PATH $LOG_PATH
-}
 
 # Method that executes all tested main code before running tests.
 setup() {

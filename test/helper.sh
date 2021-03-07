@@ -1,4 +1,5 @@
 #!/bin/sh
+# Makes the main script runnable, removes the log file and runs main file.
 actual_result_has_any_allowed_result_in_tail() {
 	# declare default function output
 	test_result=false

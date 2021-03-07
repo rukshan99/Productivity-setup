@@ -101,13 +101,11 @@ ask_if_user_wants_some_software_package() {
 # TODO: move to separate installation file
 install_user_choices() {
 	selected_software_packages=$(read_software_packages "selected")
+	
 	# loop through selected packages
-}
-
-# TODO: move to separate installation file
-install_user_choice() {
-	selected_software_package=$1
-	if [ $data_source == "selected" ]; then
-		echo $(awk '/'$installation_type':/ {print $2}' $SELECTED_SOFTWARE_LIST_LOCATION)
-	fi
+	for i in "${!selected_software_packages[@]}"; do
+	
+		# install user choice
+		$(run_main_functions $1)
+	done
 }
