@@ -53,7 +53,7 @@ setup() {
 
 @test "Verify the supported_software_packages are read correctly for category: apt." {
 	tested_category="apt"
-	actual_result=$(read_supported_software_packages_per_category $tested_category)
+	actual_result=$(read_software_packages_per_category "supported" $tested_category)
 	actual_results=($actual_result) # convert single string to list
         expected_results=("git")
 	
@@ -64,7 +64,7 @@ setup() {
 
 @test "Verify the supported_software_packages are read correctly for category: snap." {
 	tested_category="snap"
-	actual_result=$(read_supported_software_packages_per_category $tested_category)
+	actual_result=$(read_software_packages_per_category  "supported" $tested_category)
 	actual_results=($actual_result) # convert single string to list
         expected_results=("")
 	
@@ -75,7 +75,7 @@ setup() {
 
 @test "Verify the supported_software_packages are read correctly for category: custom." {
 	tested_category="custom"
-	actual_result=$(read_supported_software_packages_per_category $tested_category)
+	actual_result=$(read_software_packages_per_category  "supported" $tested_category)
 	actual_results=($actual_result) # convert single string to list
         expected_results=("")
 	
@@ -86,7 +86,7 @@ setup() {
 
 @test "Verify the supported_software_packages are read correctly for category: needUserInput." {
 	tested_category="needUserInput"
-	actual_result=$(read_supported_software_packages_per_category $tested_category)
+	actual_result=$(read_software_packages_per_category  "supported" $tested_category)
 	actual_results=($actual_result) # convert single string to list
         expected_results=("")
 	
@@ -97,7 +97,7 @@ setup() {
 
 @test "Verify the supported_software_packages are read correctly for category: deviceDependent." {
 	tested_category="deviceDependent"
-	actual_result=$(read_supported_software_packages_per_category $tested_category)
+	actual_result=$(read_software_packages_per_category  "supported" $tested_category)
 	actual_results=($actual_result) # convert single string to list
         expected_results=("")
 	
@@ -107,8 +107,7 @@ setup() {
 }
 
 @test "Verify the complete list of supported_software_packages is read correctly." {
-	software_install_categories=$(read_categories)
-	supported_software_packages=$(read_supported_software_packages $software_install_categories)
+	supported_software_packages=$(read_software_packages "supported")
 	
 	actual_results=($supported_software_packages) # convert single string to list
         expected_results=("git" "somefiller" "anotherfiller")

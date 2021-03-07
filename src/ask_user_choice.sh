@@ -1,38 +1,34 @@
 #!/bin/sh
 source src/hardcoded_variables.txt
 
-get_user_input() {
-
-	# read incoming arguments
-	test_all=$1
-	
-	software_install_categories=$(read_categories)
-	supported_software_packages=$(read_supported_software_packages $software_install_categories)
-	
-	if [ "$test_all" = "--all" ]; then
-		write_installation_list $supported_software_packages
-	else
-		user_choice=prompt_user_choice $supported_software_packages
-		write_installation_list $supported_software_packages
-	fi
-}
-
 read_categories() {
 	echo $(awk '/installationType:/ {print $2}' $SUPPORTED_SOFTWARE_LIST_LOCATION)
 }
 
-read_supported_software_packages() {
-	installation_types=("$@")
-	supported_software_packages=""
+
+read_software_packages() {
+	data_source=$1
+	
+	# get all supported installation categories
+	installation_types=($(read_categories)) # outer brackets to convert string to list
+	
+	software_packages=""
 	for i in "${!installation_types[@]}"; do
-	    supported_software_packages+=$(read_supported_software_packages_per_category "${installation_types[i]}")" "
+	    software_packages+=$(read_software_packages_per_category $data_source "${installation_types[i]}")" "
 	done
-	echo $supported_software_packages
+	echo $software_packages
 }
 
-read_supported_software_packages_per_category() {
-	installation_type=$1
-	echo $(awk '/'$installation_type':/ {print $2}' $SUPPORTED_SOFTWARE_LIST_LOCATION)
+read_software_packages_per_category() {
+	data_source=$1
+	installation_type=$2
+	
+	if [ $data_source == "selected" ]; then
+		echo $(awk '/'$installation_type':/ {print $2}' $SELECTED_SOFTWARE_LIST_LOCATION)
+	fi
+	if [ $data_source == "supported" ]; then
+		echo $(awk '/'$installation_type':/ {print $2}' $SUPPORTED_SOFTWARE_LIST_LOCATION)
+	fi
 }
 
 prompt_user_choice() {
@@ -57,7 +53,7 @@ prompt_user_choice() {
 		echo "installationType: ${installation_types[i]}" >> $LOG_LOCATION$SELECTED_SOFTWARE_FILENAME
 		
 		# read the possible software packages per installation type
-		new_software=$(read_supported_software_packages_per_category "${installation_types[i]}")
+		new_software=$(read_software_packages_per_category "${installation_types[i]}")
 		
 		# Convert software packages from string to list
 		new_software_list=($new_software)
@@ -102,6 +98,16 @@ ask_if_user_wants_some_software_package() {
 	fi
 }
 
-write_installation_list() {
-	echo "hello world"
+# TODO: move to separate installation file
+install_user_choices() {
+	selected_software_packages=$(read_software_packages "selected")
+	# loop through selected packages
+}
+
+# TODO: move to separate installation file
+install_user_choice() {
+	selected_software_package=$1
+	if [ $data_source == "selected" ]; then
+		echo $(awk '/'$installation_type':/ {print $2}' $SELECTED_SOFTWARE_LIST_LOCATION)
+	fi
 }
