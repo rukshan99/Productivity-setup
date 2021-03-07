@@ -111,7 +111,19 @@ setup() {
 	supported_software_packages=$(read_supported_software_packages $software_install_categories)
 	
 	actual_results=($supported_software_packages) # convert single string to list
-        expected_results=("git")
+        expected_results=("git" "somefiller" "anotherfiller")
+	
+	for i in "${!expected_results[@]}"; do
+	    assert_equal "${actual_results[i]}" "${expected_results[i]}"
+	done
+}
+
+
+@test "Verify user input is read correctly." {
+	selected_software_packages=$(prompt_user_choice)
+	
+	actual_results=($selected_software_packages) # convert single string to list
+        expected_results=("git" "somefiller" "anotherfiller")
 	
 	for i in "${!expected_results[@]}"; do
 	    assert_equal "${actual_results[i]}" "${expected_results[i]}"
