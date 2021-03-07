@@ -6,8 +6,8 @@ get_user_input() {
 	# read incoming arguments
 	test_all=$1
 	
-	software_install_categories=read_categories
-	supported_software_packages=read_supported_software_packages $software_install_categories
+	software_install_categories=$(read_categories)
+	supported_software_packages=$(read_supported_software_packages $software_install_categories)
 	
 	if [ "$test_all" = "--all" ]; then
 		write_installation_list $supported_software_packages
@@ -22,8 +22,17 @@ read_categories() {
 }
 
 read_supported_software_packages() {
+	installation_types=("$@")
+	supported_software_packages=""
+	for i in "${!installation_types[@]}"; do
+	    supported_software_packages+=$(read_supported_software_packages_per_category "${installation_types[i]}")" "
+	done
+	echo $supported_software_packages
+}
+
+read_supported_software_packages_per_category() {
 	installation_type=$1
-	echo $(awk '/'$installation_type'/ {print $2}' $SUPPORTED_SOFTWARE_LIST_LOCATION)
+	echo $(awk '/'$installation_type':/ {print $2}' $SUPPORTED_SOFTWARE_LIST_LOCATION)
 }
 
 prompt_user_choice() {
