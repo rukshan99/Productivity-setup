@@ -42,24 +42,45 @@ prompt_user_choice() {
 	
 	# create output log file
 	$(create_log_file $SELECTED_SOFTWARE_FILENAME)
-
+	
+	# read incoming list of installation types that are tested
 	installation_types=("$@")
+	
+	# initialise lists of softwares that are evaluated
 	supported_software_packages=""
 	selected_software_packages=""
+	
+	# loop through each installation type
 	for i in "${!installation_types[@]}"; do
+		
+		# Append the installation type to the user selection log
 		echo "installationType: ${installation_types[i]}" >> $LOG_LOCATION$SELECTED_SOFTWARE_FILENAME
+		
+		# read the possible software packages per installation type
 		new_software=$(read_supported_software_packages_per_category "${installation_types[i]}")
+		
+		# Convert software packages from string to list
 		new_software_list=($new_software)
+		
+		# Loop through list of software packages
 		for j in "${!new_software_list[@]}"; do
-			supported_software_packages+=${new_software_list[j]}" "
+		
+			# Ask the user if they want to install this software package
 			user_input=$(ask_if_user_wants_some_software_package ${new_software_list[j]})
+			
+			# add the software package to the list or not, depending on user choice
 			if [ $(echo -n $user_input | tail -c 4) == true ]; then
+				
+				# add the software package to the variable list
 		    		selected_software_packages+=${new_software_list[j]}" "
+		    		
+		    		# add the software package to the user selection log
 		    		echo "${installation_types[i]}: "${new_software_list[j]} >> $LOG_LOCATION$SELECTED_SOFTWARE_FILENAME
 	    		fi
     		done
 	done
-	echo "selected_software_packages"
+	
+	echo "The selected software packages are:"
 	echo $selected_software_packages
 	
 	# TODO: ask verification of correctness of list to user.
