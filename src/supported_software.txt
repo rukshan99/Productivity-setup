@@ -1,0 +1,6 @@
+installationType: apt
+apt: git
+installationType: snap
+installationType: custom
+installationType: needUserInput
+installationType: deviceDependent
