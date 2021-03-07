@@ -5,7 +5,7 @@ load 'libs/bats-assert/load'
 
 source test/helper.sh
 
-@test "Write tests that pass it an actual result and a list with expected results that do not occur in the actual result and assert the function returns false." {
+@test "Tests if actual_result_has_any_allowed_result_in_head method returns false if the actual result does not contain any of the allowed/expected results." {
 	ACTUAL_RESULT="this is an output with the expected output at the head"
 	ALLOWED_RESULTS=(
 		"a different output"
@@ -16,7 +16,7 @@ source test/helper.sh
 	assert_equal $(echo -n $TEST_RESULT | tail -c 5) "false"
 }
 
-@test "Write tests that pass it `this is an output` and a list that contains it in the first entry and assert the function returns true." {
+@test "Tests if actual_result_has_any_allowed_result_in_head method returns true if the actual result head equals the first list element of the allowed/expected results." {
 	ACTUAL_RESULT="this is an output with the expected output at the head"
 	ALLOWED_RESULTS=(
 		"this is an output"
@@ -28,7 +28,7 @@ source test/helper.sh
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
 }
 
-@test "Write tests that pass it `this is an output` and a list that contains it in the first middle entry and assert the function returns true." {
+@test "Tests if actual_result_has_any_allowed_result_in_head method returns true if the actual result head equals the second list element of the allowed/expected results." {
 	ACTUAL_RESULT="this is an output with the expected output at the head"
 	ALLOWED_RESULTS=(
 		"a different output"
@@ -40,7 +40,7 @@ source test/helper.sh
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
 }
 
-@test "Write tests that pass it `this is an output` and a list that contains it in the other middle entry and assert the function returns true." {
+@test "Tests if actual_result_has_any_allowed_result_in_head method returns true if the actual result head equals the third list element of the allowed/expected results." {
 	ACTUAL_RESULT="this is an output with the expected output at the head"
 	ALLOWED_RESULTS=(
 		"a different output"
@@ -52,7 +52,7 @@ source test/helper.sh
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
 }
 
-@test "Write tests that pass it `this is an output` and a list that contains it in last entry and assert the function returns true." {
+@test "Tests if actual_result_has_any_allowed_result_in_head method returns true if the actual result head equals the last list element of the allowed/expected results." {
 	ACTUAL_RESULT="this is an output with the expected output at the head"
 	ALLOWED_RESULTS=(
 		"a different output"
@@ -64,7 +64,7 @@ source test/helper.sh
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
 }
 
-@test "Write tests that pass it `this is an output` and a list that does contains it twice and assert the function returns true." {
+@test "Tests if actual_result_has_any_allowed_result_in_head method returns true if the actual result head equals the second and last list element of the allowed/expected results." {
 	ACTUAL_RESULT="this is an output with the expected output at the head"
 	ALLOWED_RESULTS=(
 		"a different output"
@@ -77,7 +77,7 @@ source test/helper.sh
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
 }
 
-@test "Write tests that pass it `this is an output` without a list and assert the function returns false." {
+@test "Tests if actual_result_has_any_allowed_result_in_head method returns false if only the actual result is passed without passing expected results." {
 	ACTUAL_RESULT="this is an output with the expected output at the head"
 	TEST_RESULT=$(actual_result_has_any_allowed_result_in_head "$ACTUAL_RESULT")
 	assert_equal $(echo -n $TEST_RESULT | tail -c 5) "false"
