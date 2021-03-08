@@ -1,4 +1,47 @@
 #!/bin/sh
+
+hardcode_user1_choice_example() {
+	for i in "${!INSTALLATION_TYPES[@]}"; do
+		# Append the installation type to the user selection log
+		echo "installationType: ${INSTALLATION_TYPES[i]}" >> $LOG_LOCATION$SELECTED_SOFTWARE_FILENAME
+		if [ "${INSTALLATION_TYPES[i]}" == apt ]; then
+			write_package_to_selected_software_log "${INSTALLATION_TYPES[i]}" "${USER1_APT_PACKAGES[@]}"
+		fi
+		if [ "${INSTALLATION_TYPES[i]}" == snap ]; then
+			write_package_to_selected_software_log "${INSTALLATION_TYPES[i]}" "${USER1_SNAP_PACKAGES[@]}"
+		fi
+		if [ "${INSTALLATION_TYPES[i]}" == custom ]; then
+			write_package_to_selected_software_log "${INSTALLATION_TYPES[i]}" "${USER1_CUSTOM_PACKAGES[@]}"
+		fi
+		if [ "${INSTALLATION_TYPES[i]}" == needUserInput ]; then
+			write_package_to_selected_software_log "${INSTALLATION_TYPES[i]}" "${USER1_NEEDUSERINPUT_PACKAGES[@]}"
+		fi
+		if [ "${INSTALLATION_TYPES[i]}" == deviceDependent ]; then
+			write_package_to_selected_software_log "${INSTALLATION_TYPES[i]}" "${USER1_DEVICEDEPENDENT_PACKAGES[@]}"
+		fi
+	done
+}
+
+# Create user that installs all supported options
+create_greedy_user() {
+	cp $SUPPORTED_SOFTWARE_LIST_LOCATION $SELECTED_SOFTWARE_LIST_LOCATION
+}
+
+write_package_to_selected_software_log() {
+	installation_type=$1
+	shift # eat first argument
+	packages=("$@")
+	#echo "packages"
+	#echo $packages
+	# Loop through list of apt installations
+	for j in "${!packages[@]}"; do
+		#echo "package"
+		#echo "${packages[j]}"
+		# add the software package to the user selection log
+		echo "$installation_type: "${packages[j]} >> $LOG_LOCATION$SELECTED_SOFTWARE_FILENAME
+	done
+}
+
 # Makes the main script runnable, removes the log file and runs main file.
 actual_result_has_any_allowed_result_in_tail() {
 	# declare default function output

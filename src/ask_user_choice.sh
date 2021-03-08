@@ -1,8 +1,16 @@
 #!/bin/sh
 source src/hardcoded_variables.txt
+source src/github.sh
 
 read_categories() {
-	echo $(awk '/installationType:/ {print $2}' $SUPPORTED_SOFTWARE_LIST_LOCATION)
+	data_source=$1
+	if [ $data_source == "selected" ]; then
+		echo $(awk '/installationType:/ {print $2}' $SELECTED_SOFTWARE_LIST_LOCATION)
+	fi
+	if [ $data_source == "supported" ]; then
+		echo $(awk '/installationType:/ {print $2}' $SUPPORTED_SOFTWARE_LIST_LOCATION)
+	fi
+	
 }
 
 
@@ -10,7 +18,7 @@ read_software_packages() {
 	data_source=$1
 	
 	# get all supported installation categories
-	installation_types=($(read_categories)) # outer brackets to convert string to list
+	installation_types=($(read_categories $data_source)) # outer brackets to convert string to list
 	
 	software_packages=""
 	for i in "${!installation_types[@]}"; do
@@ -98,14 +106,13 @@ ask_if_user_wants_some_software_package() {
 	fi
 }
 
-# TODO: move to separate installation file
 install_user_choices() {
-	selected_software_packages=$(read_software_packages "selected")
+	selected_software_packages=($(read_software_packages "selected")) # outer brackets to store as list
 	
 	# loop through selected packages
 	for i in "${!selected_software_packages[@]}"; do
-	
-		# install user choice
-		$(run_main_functions $1)
+		if [ "${selected_software_packages[i]}" == github ]; then
+			$(install_github) # install user choice: github
+		fi
 	done
 }

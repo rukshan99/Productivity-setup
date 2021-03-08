@@ -1,5 +1,5 @@
 installationType: apt
-apt: git
+apt: github
 apt: somefiller
 apt: anotherfiller
 installationType: snap

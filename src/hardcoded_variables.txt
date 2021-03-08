@@ -1,4 +1,10 @@
 LOG_LOCATION=src/logs/
 SUPPORTED_SOFTWARE_LIST_LOCATION=src/supported_software.txt
-SELECTED_SOFTWARE_LIST_LOCATION=src/selected_software.txt
+SELECTED_SOFTWARE_LIST_LOCATION=src/logs/selected_software.txt
 SELECTED_SOFTWARE_FILENAME=selected_software.txt
+INSTALLATION_TYPES=("apt" "snap" "custom" "needUserInput" "deviceDependent")
+USER1_APT_PACKAGES=("github" "somepackage")
+USER1_SNAP_PACKAGES=("none" "otherfiller")
+USER1_CUSTOM_PACKAGES=("custompackage" "anothercustompackage")
+USER1_NEEDUSERINPUT_PACKAGES=("needuserinputpackage" "anotherneeduserinputpackage")
+USER1_DEVICEDEPENDENT_PACKAGES=("devicedependentpackage" "anotherdevicedependentpackage")
