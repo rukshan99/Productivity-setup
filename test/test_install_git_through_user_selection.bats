@@ -6,26 +6,16 @@ load 'libs/bats-assert/load'
 source test/helper.sh
 source src/hardcoded_variables.txt
 source src/helper.sh
+source src/ask_user_choice.sh
 
 mkdir -p src/logs
 
 # Method that executes all tested main code before running tests.
 setup() {
-	
-	# Declare filenames of files that perform commands
-	declare -a arr=("0_apt_update"
-                "1_apt_upgrade"
-                "2_apt_install_git"
-                )
-                	
-	# Loop through files that perform commands
-	for i in "${arr[@]}"
-	do
-		# run main functions that perform some commands
-		run_main_functions "$i"
-	done
+	# TODO: create a user choice with github only
+	$(hardcode_user1_choice_example)
+	$(install_user_choices)
 }
-
 
 @test "running the apt update function in some file and verifying log output." {
 	LOG_CONTENT=$(cat $LOG_LOCATION"0_apt_update.txt")
