@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Declare filenames of files that perform commands to install github
 install_github() {

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 run_main_functions() {
 	local SCRIPT_NAME=$1	
 	SCRIPT_PATH=src/"$SCRIPT_NAME".sh
@@ -61,6 +61,8 @@ remove_log_file "$@"
 
 create_log_file() {
 	log_filename=$1
+	log_dirname=$2
+	mkdir -p $log_dirname
 	touch src/logs/$log_filename
 }
 
