@@ -40,15 +40,15 @@ read_software_packages_per_category() {
 }
 
 prompt_user_choice() {
+	# read incoming list of installation types that are tested
+	installation_types=("$@")
+	
 	# clear output log
 	source src/helper.sh
 	$(remove_log_file $SELECTED_SOFTWARE_FILENAME)
 	
 	# create output log file
-	$(create_log_file $SELECTED_SOFTWARE_FILENAME)
-	
-	# read incoming list of installation types that are tested
-	installation_types=("$@")
+	$(create_log_file $SELECTED_SOFTWARE_FILENAME $LOG_LOCATION)
 	
 	# initialise lists of softwares that are evaluated
 	supported_software_packages=""
@@ -56,12 +56,12 @@ prompt_user_choice() {
 	
 	# loop through each installation type
 	for i in "${!installation_types[@]}"; do
-		
+
 		# Append the installation type to the user selection log
 		echo "installationType: ${installation_types[i]}" >> $LOG_LOCATION$SELECTED_SOFTWARE_FILENAME
 		
 		# read the possible software packages per installation type
-		new_software=$(read_software_packages_per_category "${installation_types[i]}")
+		new_software=$(read_software_packages_per_category "supported" "${installation_types[i]}")
 		
 		# Convert software packages from string to list
 		new_software_list=($new_software)
@@ -92,6 +92,8 @@ prompt_user_choice() {
 
 ask_if_user_wants_some_software_package() {
 	software_package=$1
+	echo "The incoming software_package is:"
+	echo $software_package
 	if [ ${#software_package} -ge 1 ]; then
 		while true; do
 		    read -p "Do you wish to install: $software_package?" yn
