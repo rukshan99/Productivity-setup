@@ -92,8 +92,6 @@ prompt_user_choice() {
 
 ask_if_user_wants_some_software_package() {
 	software_package=$1
-	echo "The incoming software_package is:"
-	echo $software_package
 	if [ ${#software_package} -ge 1 ]; then
 		while true; do
 		    read -p "Do you wish to install: $software_package?" yn
