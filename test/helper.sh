@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 hardcode_user1_choice_example() {
 	for i in "${!INSTALLATION_TYPES[@]}"; do

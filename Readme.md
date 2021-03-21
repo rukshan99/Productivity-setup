@@ -27,10 +27,10 @@ chmod +x install-bats-libs.sh
 Next, run the unit tests with:
 ```
 chmod +x test.sh
-./test.sh
+sudo ./test.sh
 ```
 Note: Put your unit test files (with extention .bats) in folder: `/test/`
 
 
 ## Functionality
-Unit tests shell code/scripts and provides continuous integration testing through travis
+Unit tests bash code/scripts and provides continuous integration testing through Travis CI. Intended to be built as a two-line command that sets up a laptop for productivity right after a clean Ubuntu image installation.

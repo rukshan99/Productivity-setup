@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 run_main_functions() {
 	local SCRIPT_NAME=$1	
 	SCRIPT_PATH=src/"$SCRIPT_NAME".sh

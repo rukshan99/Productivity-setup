@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 source src/hardcoded_variables.txt
 source src/github.sh
 
 read_categories() {
 	data_source=$1
-	if [ $data_source == "selected" ]; then
+	if [[ $data_source == "selected" ]]; then
 		echo $(awk '/installationType:/ {print $2}' $SELECTED_SOFTWARE_LIST_LOCATION)
 	fi
-	if [ $data_source == "supported" ]; then
+	if [[ $data_source == "supported" ]]; then
 		echo $(awk '/installationType:/ {print $2}' $SUPPORTED_SOFTWARE_LIST_LOCATION)
 	fi
 	
