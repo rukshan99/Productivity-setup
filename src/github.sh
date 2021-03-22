@@ -1,4 +1,5 @@
 #!/bin/bash
+. src/helper.sh
 
 # Declare filenames of files that perform commands to install github
 install_github() {
