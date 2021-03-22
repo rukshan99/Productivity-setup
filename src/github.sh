@@ -18,4 +18,6 @@ install_github() {
 	done
 }
 
-
+test_github() {
+	./test/libs/bats/bin/bats test/post_install/test_install_git_postsetup.bats
+}
