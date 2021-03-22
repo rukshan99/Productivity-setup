@@ -12,7 +12,7 @@ run_main_functions() {
 	fi
 	
 	# run the function that updates apt
-	sudo ./$SCRIPT_PATH $LOG_PATH
+	source ./$SCRIPT_PATH $LOG_PATH
 }
 
 execute_files() {

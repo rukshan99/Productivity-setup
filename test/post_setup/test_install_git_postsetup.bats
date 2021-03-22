@@ -1,7 +1,7 @@
 #!./test/libs/bats/bin/bats
 
-load '../libs/bats-support/load'
-load '../libs/bats-assert/load'
+load '../../test/libs/bats-support/load'
+load '../../test/libs/bats-assert/load'
 
 source src/hardcoded_variables.txt
 source test/helper.sh

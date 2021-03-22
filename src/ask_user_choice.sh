@@ -1,7 +1,6 @@
 #!/bin/bash
 source src/hardcoded_variables.txt
 source src/github.sh
-source src/install_user_choice.sh
 
 read_categories() {
 	data_source=$1
@@ -85,9 +84,9 @@ prompt_user_choice() {
     		done
 	done
 	
-	#echo "The selected software packages are:"
+	echo "The selected software packages are:"
 	echo $selected_software_packages
-
+	
 	# TODO: ask verification of correctness of list to user.
 }
 

@@ -1,6 +1,6 @@
 #!/bin/bash
-. src/helper.sh
-
+#. src/helper.sh
+#source src/helper.sh
 # Declare filenames of files that perform commands to install github
 install_github() {
 	
@@ -19,5 +19,5 @@ install_github() {
 }
 
 test_github() {
-	./test/libs/bats/bin/bats test/post_install/test_install_git_postsetup.bats
+	./test/libs/bats/bin/bats test/post_setup/test_install_git_postsetup.bats
 }
