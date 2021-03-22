@@ -7,6 +7,7 @@ source test/helper.sh
 source src/hardcoded_variables.txt
 source src/helper.sh
 source src/ask_user_choice.sh
+source src/install_user_choice.sh
 
 mkdir -p src/logs
 
