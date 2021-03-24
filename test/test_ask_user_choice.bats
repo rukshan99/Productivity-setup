@@ -27,6 +27,10 @@ run_main_functions() {
 
 # Method that executes all tested main code before running tests.
 setup() {
+	# print test filename to screen.
+	if [ "${BATS_TEST_NUMBER}" = 1 ];then
+		echo "# Testfile: $(basename ${BATS_TEST_FILENAME})-" >&3
+	fi
 	
 	# Declare filenames of files that perform commands
 	declare -a arr=("ask_user_choice"
@@ -97,7 +101,9 @@ setup() {
 	tested_category="apt"
 	actual_result=$(read_software_packages_per_category "supported" $tested_category)
 	actual_results=($actual_result) # convert single string to list
-        expected_results=("github")
+        expected_results=("github" 
+        	"signal"
+        	)
 	
 	for i in "${!expected_results[@]}"; do
 	    assert_equal "${actual_results[i]}" "${expected_results[i]}"
@@ -108,7 +114,7 @@ setup() {
 	tested_category="snap"
 	actual_result=$(read_software_packages_per_category  "supported" $tested_category)
 	actual_results=($actual_result) # convert single string to list
-        expected_results=("")
+        expected_results=("anki")
 	
 	for i in "${!expected_results[@]}"; do
 	    assert_equal "${actual_results[i]}" "${expected_results[i]}"
@@ -152,7 +158,7 @@ setup() {
 	supported_software_packages=$(read_software_packages "supported")
 	
 	actual_results=($supported_software_packages) # convert single string to list
-        expected_results=("github" "somefiller" "signal")
+        expected_results=("github" "signal" "anki")
 	
 	for i in "${!expected_results[@]}"; do
 	    assert_equal "${actual_results[i]}" "${expected_results[i]}"

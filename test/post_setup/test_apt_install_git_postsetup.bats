@@ -1,27 +1,10 @@
 #!./test/libs/bats/bin/bats
 
-load 'libs/bats-support/load'
-load 'libs/bats-assert/load'
+load '../../test/libs/bats-support/load'
+load '../../test/libs/bats-assert/load'
 
-source test/helper.sh
 source src/hardcoded_variables.txt
-source src/helper.sh
-source src/ask_user_choice.sh
-source src/install_user_choice.sh
-
-mkdir -p src/logs
-
-# Method that executes all tested main code before running tests.
-setup() {
-	# print test filename to screen.
-	if [ "${BATS_TEST_NUMBER}" = 1 ];then
-		echo "# Testfile: $(basename ${BATS_TEST_FILENAME})-" >&3
-	fi
-	
-	# TODO: create a user choice with github only
-	$(hardcode_user1_choice_example)
-	$(install_user_choices)
-}
+source test/helper.sh
 
 @test "running the apt update function in some file and verifying log output." {
 	LOG_CONTENT=$(cat $LOG_LOCATION"apt_0_update.txt")
@@ -45,4 +28,22 @@ setup() {
 	EXPECTED_OUTPUT="Reading package lists... Building dependency tree... Reading state information... git is already the newest version"
 		
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
+}
+
+@test "Checking git version response." {
+	COMMAND_OUTPUT=$(git --version)
+	EXPECTED_OUTPUT="git version 2."
+		
+	ALLOWED_RESULTS=("git version 2."
+        	"git version 3."
+        	"git version 4."
+        	"git version 5."
+        	"git version 6."
+        	"git version 7."
+        	"git version 8."
+        	"git version 9."
+        )
+	TEST_RESULT=$(actual_result_has_any_allowed_result_in_head "$COMMAND_OUTPUT" "${ALLOWED_RESULTS[@]}")
+	
+	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
 }

@@ -30,6 +30,6 @@ apt_add_signal_repo_to_repo_list() {
 		echo $update > "${LOG_PATH}"
 	else
 		echo "The signal repository was already added to the list of signal repositories." > "${LOG_PATH}"
-	fi	
+	fi
 }
 apt_add_signal_repo_to_repo_list "$@"

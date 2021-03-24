@@ -11,12 +11,16 @@ mkdir -p src/logs
 
 # Method that executes all tested main code before running tests.
 setup() {
+	# print test filename to screen.
+	if [ "${BATS_TEST_NUMBER}" = 1 ];then
+		echo "# Testfile: $(basename ${BATS_TEST_FILENAME})-" >&3
+	fi
 	
 	# Declare filenames of files that perform commands
-	declare -a arr=("3_1_apt_install_signal"
-                "3_2_apt_install_signal"
-                "0_apt_update"
-                "3_4_apt_install_signal"
+	declare -a arr=("apt_3_1_install_signal"
+                "apt_3_2_install_signal"
+                "apt_0_update"
+                "apt_3_4_install_signal"
                 )
                 	
 	# Loop through files that perform commands
@@ -28,7 +32,7 @@ setup() {
 }
 
 @test "running the apt update function in some file and verifying log output." {
-	LOG_CONTENT=$(cat $LOG_LOCATION"0_apt_update.txt")
+	LOG_CONTENT=$(cat $LOG_LOCATION"apt_0_update.txt")
         ALLOWED_RESULTS=("Reading package lists... Building dependency tree... Reading state information... All packages are up to date."
         	"packages can be upgraded. Run 'apt list --upgradable' to see them."
         )
@@ -38,14 +42,14 @@ setup() {
 }
 
 @test "running the apt install signal part 1/3 function in some file and verifying log output." {
-	LOG_ENDING=$(head -c 2 $LOG_LOCATION"3_1_apt_install_signal.txt")
+	LOG_ENDING=$(head -c 2 $LOG_LOCATION"apt_3_1_install_signal.txt")
 	EXPECTED_OUTPUT="OK"
 		
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
 }
 
 @test "running the apt install signal part 2/3 function in some file and verifying log output." {	
-	LOG_CONTENT=$(cat $LOG_LOCATION"3_2_apt_install_signal.txt")
+	LOG_CONTENT=$(cat $LOG_LOCATION"apt_3_2_install_signal.txt")
 	ALLOWED_RESULTS=("deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
         	"The signal repository was already added to the list of signal repositories."
         )
@@ -57,7 +61,7 @@ setup() {
 }
 
 @test "running the apt install signal part 1/3 function in some file and verifying head of log output." {
-	LOG_CONTENT=$(cat $LOG_LOCATION"3_4_apt_install_signal.txt")
+	LOG_CONTENT=$(cat $LOG_LOCATION"apt_3_4_install_signal.txt")
 	ALLOWED_RESULTS=("Reading package lists... Building dependency tree... Reading state information... signal-desktop is already the newest version"
         )
         
@@ -66,7 +70,7 @@ setup() {
 }
 
 @test "running the apt install signal part 1/3 function in some file and verifying tail of log output." {
-	LOG_CONTENT=$(cat $LOG_LOCATION"3_4_apt_install_signal.txt")
+	LOG_CONTENT=$(cat $LOG_LOCATION"apt_3_4_install_signal.txt")
 	ALLOWED_RESULTS=("0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded."
 	"1 upgraded, 0 newly installed, 0 to remove and 0 not upgraded."
 	"0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded."

@@ -5,6 +5,13 @@ load 'libs/bats-assert/load'
 
 source test/helper.sh
 
+setup() {
+	# print test filename to screen.
+	if [ "${BATS_TEST_NUMBER}" = 1 ];then
+		echo "# Testfile: $(basename ${BATS_TEST_FILENAME})-" >&3
+	fi
+}
+
 @test "assert the right string is not in the tail of the left string." {
 	left="Right hand string"
 	right="Some string"

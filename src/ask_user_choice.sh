@@ -1,7 +1,5 @@
 #!/bin/bash
 source src/hardcoded_variables.txt
-source src/github.sh
-
 read_categories() {
 	data_source=$1
 	if [[ $data_source == "selected" ]]; then

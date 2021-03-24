@@ -5,6 +5,13 @@ load 'libs/bats-assert/load'
 
 source test/helper.sh
 
+setup() {
+	# print test filename to screen.
+	if [ "${BATS_TEST_NUMBER}" = 1 ];then
+		echo "# Testfile: $(basename ${BATS_TEST_FILENAME})-" >&3
+	fi
+}
+
 @test "Tests if actual_result_contains_any_allowed_result method returns false if the actual result does not contain any of the allowed/expected results." {
 	ACTUAL_RESULT="The center target string is: this is an output, and this tail is just a filler."
 	ALLOWED_RESULTS=(

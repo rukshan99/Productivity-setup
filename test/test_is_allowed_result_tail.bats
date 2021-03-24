@@ -5,6 +5,13 @@ load 'libs/bats-assert/load'
 
 source test/helper.sh
 
+setup() {
+	# print test filename to screen.
+	if [ "${BATS_TEST_NUMBER}" = 1 ];then
+		echo "# Testfile: $(basename ${BATS_TEST_FILENAME})-" >&3
+	fi
+}
+
 @test "Tests if actual_result_has_any_allowed_result_in_tail method returns false if the actual result does not contain any of the allowed/expected results." {
 	ACTUAL_RESULT="The tail of this in put is an output that is expected: this is an output"
 	ALLOWED_RESULTS=(

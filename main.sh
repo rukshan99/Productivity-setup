@@ -5,7 +5,6 @@
 . src/helper.sh
 
 # get list of all possible installation types and pass it to the prompt.
-
 function run_prompt_user_choice() {
 	supported_installation_categories=$(read_categories "supported")
 	selected_software_packages=$(prompt_user_choice $supported_installation_categories)

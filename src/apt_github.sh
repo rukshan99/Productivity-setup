@@ -5,9 +5,9 @@
 install_github() {
 	
 	# Declare filenames of files that perform commands
-	declare -a arr=("0_apt_update"
-                "1_apt_upgrade"
-                "2_apt_install_git"
+	declare -a arr=("apt_0_update"
+                "apt_1_upgrade"
+                "apt_2_install_git"
                 )
                 	
 	# Loop through files that perform commands
@@ -19,5 +19,5 @@ install_github() {
 }
 
 test_github() {
-	./test/libs/bats/bin/bats test/post_setup/test_install_git_postsetup.bats
+	./test/libs/bats/bin/bats test/post_setup/test_apt_install_git_postsetup.bats
 }

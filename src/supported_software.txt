@@ -1,8 +1,8 @@
 installationType: apt
 apt: github
-apt: somefiller
 apt: signal
 installationType: snap
+snap: anki
 installationType: custom
 installationType: needUserInput
 installationType: deviceDependent
