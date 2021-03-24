@@ -29,3 +29,21 @@ source test/helper.sh
 		
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
 }
+
+@test "Checking git version response." {
+	COMMAND_OUTPUT=$(git --version)
+	EXPECTED_OUTPUT="git version 2."
+		
+	ALLOWED_RESULTS=("git version 2."
+        	"git version 3."
+        	"git version 4."
+        	"git version 5."
+        	"git version 6."
+        	"git version 7."
+        	"git version 8."
+        	"git version 9."
+        )
+	TEST_RESULT=$(actual_result_has_any_allowed_result_in_head "$COMMAND_OUTPUT" "${ALLOWED_RESULTS[@]}")
+	
+	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
+}

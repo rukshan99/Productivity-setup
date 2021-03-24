@@ -152,22 +152,9 @@ setup() {
 	supported_software_packages=$(read_software_packages "supported")
 	
 	actual_results=($supported_software_packages) # convert single string to list
-        expected_results=("github" "somefiller" "anotherfiller")
+        expected_results=("github" "somefiller" "signal")
 	
 	for i in "${!expected_results[@]}"; do
 	    assert_equal "${actual_results[i]}" "${expected_results[i]}"
 	done
 }
-
-# Disabled test to allow usage of the CI pipeline. 
-# Reason for disabling is: I did not yet find a way to simulate the y/n user input
-#@test "Verify user input is read correctly." {
-#	#selected_software_packages=$(prompt_user_choice $(read_categories "supported"))
-#	./main.sh "y" "y" "n"
-#	#actual_results=($selected_software_packages) # convert single string to list
-#        expected_results=("github" "somefiller" "anotherfiller")
-#	
-#	for i in "${!expected_results[@]}"; do
-#	    assert_equal "${actual_results[i]}" "${expected_results[i]}"
-#	done
-#}
