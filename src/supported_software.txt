@@ -1,6 +1,7 @@
 installationType: apt
 apt: autokey-gtk
 apt: github
+apt: keepass2
 apt: signal
 installationType: snap
 snap: anki

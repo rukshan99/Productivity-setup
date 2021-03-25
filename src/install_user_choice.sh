@@ -3,6 +3,7 @@ source src/hardcoded_variables.txt
 
 source src/apt_autokey_gtk.sh
 source src/apt_github.sh
+source src/apt_keepass2.sh
 source src/apt_signal.sh
 source src/snap_anki.sh
 
@@ -17,6 +18,8 @@ install_user_choices() {
 			$(install_autokey_gtk) # install user choice: autokey_gtk
 		elif [ "${selected_software_packages[i]}" == github ]; then
 			$(install_github) # install user choice: github
+		elif [ "${selected_software_packages[i]}" == keepass2 ]; then
+			$(install_keepass2) # install user choice: keepass2
 		elif [ "${selected_software_packages[i]}" == signal ]; then
 			$(install_signal) # install user choice: signal
 		fi
@@ -34,6 +37,8 @@ test_user_choice_installation() {
 			test_autokey_gtk
 		elif [ "${selected_software_packages[i]}" == github ]; then
 			test_github
+		elif [ "${selected_software_packages[i]}" == keepass2 ]; then
+			test_keepass2
 		elif [ "${selected_software_packages[i]}" == signal ]; then
 			test_signal
 		fi
