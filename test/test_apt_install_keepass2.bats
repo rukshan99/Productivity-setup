@@ -52,18 +52,13 @@ setup() {
 
 @test "running the apt install keepass2 function in some file and verifying log output." {
 	LOG_ENDING=$(head -c 123 $LOG_LOCATION"apt_5_3_install_keepass2.txt")
-	#EXPECTED_OUTPUT="Reading package lists... Building dependency tree... Reading state information... keepass2 is already the newest version"
-	#assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
-	
 	ALLOWED_RESULTS=("Reading package lists... Building dependency tree... Reading state information... All packages are up to date."
 		"Reading package lists... Building dependency tree... Reading state information... keepass2 is already the newest version"
 		"Reading package lists... Building dependency tree... Reading state information... The following packages were automatically"
         	"packages can be upgraded. Run 'apt list --upgradable' to see them."
         )
 	TEST_RESULT=$(actual_result_has_any_allowed_result_in_head "$LOG_ENDING" "${ALLOWED_RESULTS[@]}")
-	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
-	
-		
+	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"		
 }
 
 @test "Checking autokey_gtk version response." {
