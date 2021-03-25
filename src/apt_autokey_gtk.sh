@@ -1,6 +1,6 @@
 #!/bin/bash
 # Declare filenames of files that perform commands to install github
-install_github() {
+install_autokey_gtk() {
 	
 	# Declare filenames of files that perform commands
 	declare -a arr=("apt_0_update"
@@ -16,6 +16,6 @@ install_github() {
 	done
 }
 
-test_github() {
-	./test/libs/bats/bin/bats test/post_setup/test_apt_install_git_postsetup.bats
+test_autokey_gtk() {
+	./test/libs/bats/bin/bats test/post_setup/test_apt_install_autokey_gtk_postsetup.bats
 }

@@ -1,4 +1,5 @@
 installationType: apt
+apt: autokey-gtk
 apt: github
 apt: signal
 installationType: snap

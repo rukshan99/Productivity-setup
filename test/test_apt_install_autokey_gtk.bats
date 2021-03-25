@@ -19,7 +19,7 @@ setup() {
 	# Declare filenames of files that perform commands
 	declare -a arr=("apt_0_update"
                 "apt_1_upgrade"
-                "apt_2_install_git"
+                "apt_4_install_autokey_gtk"
                 )
                 	
 	# Loop through files that perform commands
@@ -47,27 +47,24 @@ setup() {
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
 }
 
-@test "running the apt install git function in some file and verifying log output." {
-	LOG_ENDING=$(head -c 115 $LOG_LOCATION"apt_2_install_git.txt")
-	EXPECTED_OUTPUT="Reading package lists... Building dependency tree... Reading state information... git is already the newest version"
+@test "running the apt install autokey_gtk function in some file and verifying log output." {
+	LOG_ENDING=$(head -c 123 $LOG_LOCATION"apt_4_install_autokey_gtk.txt")
+	EXPECTED_OUTPUT="Reading package lists... Building dependency tree... Reading state information... autokey-gtk is already the newest version"
 		
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
 }
 
-@test "Checking git version response." {
-	COMMAND_OUTPUT=$(git --version)
-	EXPECTED_OUTPUT="git version 2."
-		
-	ALLOWED_RESULTS=("git version 2."
-        	"git version 3."
-        	"git version 4."
-        	"git version 5."
-        	"git version 6."
-        	"git version 7."
-        	"git version 8."
-        	"git version 9."
-        )
-	TEST_RESULT=$(actual_result_has_any_allowed_result_in_head "$COMMAND_OUTPUT" "${ALLOWED_RESULTS[@]}")
-	
-	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"
+@test "Checking autokey_gtk version response." {
+	COMMAND_OUTPUT=$(autokey-gtk --help)
+	EXPECTED_OUTPUT="Usage: autokey-gtk [options]
+
+Options:
+  -h, --help       show this help message and exit
+  -l, --verbose    Enable verbose logging
+  -c, --configure  Show the configuration window on startup"
+	COMMAND_OUTPUT_CHECKSUM=$(echo -e $COMMAND_OUTPUT | md5sum)
+	EXPECTED_OUTPUT_CHECKSUM=$(echo -e $EXPECTED_OUTPUT | md5sum)
+
+	assert_equal "$COMMAND_OUTPUT" "$EXPECTED_OUTPUT"
+	assert_equal "$COMMAND_OUTPUT_CHECKSUM" "$EXPECTED_OUTPUT_CHECKSUM"
 }
