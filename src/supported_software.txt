@@ -8,6 +8,7 @@ apt: searchmonkey
 apt: signal
 apt: texlive-xetex
 apt: texmaker
+apt: wine
 installationType: snap
 snap: anki
 installationType: custom

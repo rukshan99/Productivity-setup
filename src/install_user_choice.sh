@@ -10,6 +10,7 @@ source src/apt_signal.sh
 source src/apt_searchmonkey.sh
 source src/apt_texlive_xetex.sh
 source src/apt_texmaker.sh
+source src/apt_wine.sh
 source src/snap_anki.sh
 
 install_user_choices() {
@@ -37,6 +38,8 @@ install_user_choices() {
 			$(install_texlive_xetex) # install user choice: texlive_xetex
 		elif [ "${selected_software_packages[i]}" == texmaker ]; then
 			$(install_texmaker) # install user choice: texmaker
+		elif [ "${selected_software_packages[i]}" == wine ]; then
+			$(install_wine) # install user choice: wine
 		fi
 	done
 }
@@ -66,6 +69,8 @@ test_user_choice_installation() {
 			test_texlive_xetex
 		elif [ "${selected_software_packages[i]}" == texmaker ]; then
 			test_texmaker
+		elif [ "${selected_software_packages[i]}" == wine ]; then
+			test_wine
 		fi
 	done
 }
