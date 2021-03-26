@@ -19,7 +19,7 @@ setup() {
 	# Declare filenames of files that perform commands
 	declare -a arr=("apt_0_update"
                 "apt_1_upgrade"
-                "apt_8_install_searchmonkey"
+                "apt_10_install_texmaker"
                 )
                 	
 	# Loop through files that perform commands
@@ -47,10 +47,10 @@ setup() {
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
 }
 
-@test "running the apt install searchmonkey function in some file and verifying log output." {
-	LOG_ENDING=$(head -c 123 $LOG_LOCATION"apt_8_install_searchmonkey.txt")
+@test "running the apt install texmaker function in some file and verifying log output." {
+	LOG_ENDING=$(head -c 123 $LOG_LOCATION"apt_10_install_texmaker.txt")
 	ALLOWED_RESULTS=("Reading package lists... Building dependency tree... Reading state information... All packages are up to date."
-		"Reading package lists... Building dependency tree... Reading state information... searchmonkey is already the newest"
+		"Reading package lists... Building dependency tree... Reading state information... texmaker is already the newest"
 		"Reading package lists... Building dependency tree... Reading state information... The following packages were automatically"
         	"packages can be upgraded. Run 'apt list --upgradable' to see them."
         )
@@ -58,10 +58,10 @@ setup() {
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"		
 }
 
-@test "Checking searchmonkey version response." {
-	COMMAND_OUTPUT=$(apt show searchmonkey)
-	COMMAND_HEAD=${COMMAND_OUTPUT:0:21}
-	EXPECTED_OUTPUT="Package: searchmonkey"
+@test "Checking texmaker version response." {
+	COMMAND_OUTPUT=$(apt show texmaker)
+	COMMAND_HEAD=${COMMAND_OUTPUT:0:17}
+	EXPECTED_OUTPUT="Package: texmaker"
 
 	assert_equal "$COMMAND_HEAD" "$EXPECTED_OUTPUT"
 }

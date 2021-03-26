@@ -9,6 +9,7 @@ source src/apt_privoxy.sh
 source src/apt_signal.sh
 source src/apt_searchmonkey.sh
 source src/apt_texlive_xetex.sh
+source src/apt_texmaker.sh
 source src/snap_anki.sh
 
 install_user_choices() {
@@ -34,6 +35,8 @@ install_user_choices() {
 			$(install_signal) # install user choice: signal
 		elif [ "${selected_software_packages[i]}" == texlive-xetex ]; then
 			$(install_texlive_xetex) # install user choice: texlive_xetex
+		elif [ "${selected_software_packages[i]}" == texmaker ]; then
+			$(install_texmaker) # install user choice: texmaker
 		fi
 	done
 }
@@ -61,6 +64,8 @@ test_user_choice_installation() {
 			test_signal
 		elif [ "${selected_software_packages[i]}" == texlive-xetex ]; then
 			test_texlive_xetex
+		elif [ "${selected_software_packages[i]}" == texmaker ]; then
+			test_texmaker
 		fi
 	done
 }

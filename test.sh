@@ -8,4 +8,5 @@
 #./test/libs/bats/bin/bats test/test_apt_install_privoxy.bats
 #./test/libs/bats/bin/bats test/test_apt_install_openvpn3.bats
 #./test/libs/bats/bin/bats test/test_apt_install_searchmonkey.bats
-./test/libs/bats/bin/bats test/test_apt_install_texlive_xetex.bats
+#./test/libs/bats/bin/bats test/test_apt_install_texlive_xetex.bats
+./test/libs/bats/bin/bats test/test_apt_install_texmaker.bats
