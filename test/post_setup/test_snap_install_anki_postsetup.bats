@@ -29,3 +29,19 @@ source test/helper.sh
 		
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
 }
+
+@test "Checking notepad++ is installed." {
+	COMMAND_OUTPUT=$(snap list)
+	EXPECTED_OUTPUT="notepad-plus-plus"
+	
+	string='My long string'
+	if [[ $COMMAND_OUTPUT == *"anki-woodrow"* ]]; then
+		echo "It's there!"
+		assert_equal true true
+	else
+		assert_equal true false
+	fi
+
+	#assert_contains "$COMMAND_OUTPUT" "$EXPECTED_OUTPUT" #assert_contains: command not found
+
+}

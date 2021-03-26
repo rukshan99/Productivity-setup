@@ -12,6 +12,7 @@ source src/apt_texlive_xetex.sh
 source src/apt_texmaker.sh
 source src/apt_wine.sh
 source src/snap_anki.sh
+source src/snap_notepad_plus_plus.sh
 
 install_user_choices() {
 	selected_software_packages=($(read_software_packages "selected")) # outer brackets to store as list
@@ -26,6 +27,8 @@ install_user_choices() {
 			$(install_github) # install user choice: github
 		elif [ "${selected_software_packages[i]}" == keepass2 ]; then
 			$(install_keepass2) # install user choice: keepass2
+		elif [ "${selected_software_packages[i]}" == notepad++ ]; then
+			$(install_notepad_plus_plus) # install user choice: notepad_plus_plus
 		elif [ "${selected_software_packages[i]}" == openvpn3 ]; then
 			$(install_openvpn3) # install user choice: openvpn3
 		elif [ "${selected_software_packages[i]}" == privoxy ]; then
@@ -57,6 +60,8 @@ test_user_choice_installation() {
 			test_github
 		elif [ "${selected_software_packages[i]}" == keepass2 ]; then
 			test_keepass2
+		elif [ "${selected_software_packages[i]}" == notepad++ ]; then
+			test_notepad_plus_plus
 		elif [ "${selected_software_packages[i]}" == openvpn3 ]; then
 			test_openvpn3
 		elif [ "${selected_software_packages[i]}" == privoxy ]; then

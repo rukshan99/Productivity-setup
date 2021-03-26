@@ -19,7 +19,7 @@ setup() {
 	# Declare filenames of files that perform commands
 	declare -a arr=("apt_0_update"
                 "apt_1_upgrade"
-                "snap_0_install_anki"
+                "snap_1_install_notepad_plus_plus"
                 )
                 	
 	# Loop through files that perform commands
@@ -48,7 +48,7 @@ setup() {
 }
 
 @test "running the apt install git function in some file and verifying log output." {
-	LOG_ENDING=$(head -c 115 $LOG_LOCATION"snap_0_install_anki.txt")
+	LOG_ENDING=$(head -c 115 $LOG_LOCATION"snap_1_install_notepad_plus_plus.txt")
 	EXPECTED_OUTPUT=""
 		
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
@@ -59,7 +59,7 @@ setup() {
 	EXPECTED_OUTPUT="notepad-plus-plus"
 	
 	string='My long string'
-	if [[ $COMMAND_OUTPUT == *"anki-woodrow"* ]]; then
+	if [[ $COMMAND_OUTPUT == *"notepad-plus-plus"* ]]; then
 		echo "It's there!"
 		assert_equal true true
 	else
@@ -70,4 +70,4 @@ setup() {
 
 }
 
-# TODO: find command to test if anki is installed correctly, e.g. something like anki --version
+# TODO: find command to test if notepad++ is installed correctly, e.g. something like notepad-plus-plus --version

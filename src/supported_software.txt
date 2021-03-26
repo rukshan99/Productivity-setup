@@ -11,6 +11,7 @@ apt: texmaker
 apt: wine
 installationType: snap
 snap: anki
+snap: notepad++
 installationType: custom
 installationType: needUserInput
 installationType: deviceDependent

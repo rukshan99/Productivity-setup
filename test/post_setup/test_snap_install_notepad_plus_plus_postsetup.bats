@@ -1,34 +1,10 @@
 #!./test/libs/bats/bin/bats
 
-load 'libs/bats-support/load'
-load 'libs/bats-assert/load'
+load '../../test/libs/bats-support/load'
+load '../../test/libs/bats-assert/load'
 
-source test/helper.sh
 source src/hardcoded_variables.txt
-source src/helper.sh
-
-mkdir -p src/logs
-
-# Method that executes all tested main code before running tests.
-setup() {
-	# print test filename to screen.
-	if [ "${BATS_TEST_NUMBER}" = 1 ];then
-		echo "# Testfile: $(basename ${BATS_TEST_FILENAME})-" >&3
-	fi
-		
-	# Declare filenames of files that perform commands
-	declare -a arr=("apt_0_update"
-                "apt_1_upgrade"
-                "snap_0_install_anki"
-                )
-                	
-	# Loop through files that perform commands
-	for i in "${arr[@]}"
-	do
-		# run main functions that perform some commands
-		run_main_functions "$i"
-	done
-}
+source test/helper.sh
 
 @test "running the apt update function in some file and verifying log output." {
 	LOG_CONTENT=$(cat $LOG_LOCATION"apt_0_update.txt")
@@ -48,7 +24,7 @@ setup() {
 }
 
 @test "running the apt install git function in some file and verifying log output." {
-	LOG_ENDING=$(head -c 115 $LOG_LOCATION"snap_0_install_anki.txt")
+	LOG_ENDING=$(head -c 115 $LOG_LOCATION"snap_1_install_notepad_plus_plus.txt")
 	EXPECTED_OUTPUT=""
 		
 	assert_equal "$LOG_ENDING" "$EXPECTED_OUTPUT"
@@ -57,9 +33,16 @@ setup() {
 @test "Checking notepad++ is installed." {
 	COMMAND_OUTPUT=$(snap list)
 	EXPECTED_OUTPUT="notepad-plus-plus"
+
+	assert_contains "$COMMAND_HEAD" "$EXPECTED_OUTPUT"
+}
+
+@test "Checking notepad++ is installed." {
+	COMMAND_OUTPUT=$(snap list)
+	EXPECTED_OUTPUT="notepad-plus-plus"
 	
 	string='My long string'
-	if [[ $COMMAND_OUTPUT == *"anki-woodrow"* ]]; then
+	if [[ $COMMAND_OUTPUT == *"notepad-plus-plus"* ]]; then
 		echo "It's there!"
 		assert_equal true true
 	else
@@ -70,4 +53,4 @@ setup() {
 
 }
 
-# TODO: find command to test if anki is installed correctly, e.g. something like anki --version
+# TODO: find command to test if notepad++ is installed correctly, e.g. something like notepad-plus-plus --version
