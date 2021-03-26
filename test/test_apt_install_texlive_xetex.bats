@@ -1,10 +1,34 @@
 #!./test/libs/bats/bin/bats
 
-load '../../test/libs/bats-support/load'
-load '../../test/libs/bats-assert/load'
+load 'libs/bats-support/load'
+load 'libs/bats-assert/load'
 
-source src/hardcoded_variables.txt
 source test/helper.sh
+source src/hardcoded_variables.txt
+source src/helper.sh
+
+mkdir -p src/logs
+
+# Method that executes all tested main code before running tests.
+setup() {
+	# print test filename to screen.
+	if [ "${BATS_TEST_NUMBER}" = 1 ];then
+		echo "# Testfile: $(basename ${BATS_TEST_FILENAME})-" >&3
+	fi
+	
+	# Declare filenames of files that perform commands
+	declare -a arr=("apt_0_update"
+                "apt_1_upgrade"
+                "apt_9_install_texlive_xetex"
+                )
+                	
+	# Loop through files that perform commands
+	for i in "${arr[@]}"
+	do
+		# run main functions that perform some commands
+		run_main_functions "$i"
+	done
+}
 
 @test "running the apt update function in some file and verifying log output." {
 	LOG_CONTENT=$(cat $LOG_LOCATION"apt_0_update.txt")
@@ -24,9 +48,9 @@ source test/helper.sh
 }
 
 @test "running the apt install searchmonkey function in some file and verifying log output." {
-	LOG_ENDING=$(head -c 123 $LOG_LOCATION"apt_8_install_searchmonkey.txt")
+	LOG_ENDING=$(head -c 123 $LOG_LOCATION"apt_9_install_texlive_xetex.txt")
 	ALLOWED_RESULTS=("Reading package lists... Building dependency tree... Reading state information... All packages are up to date."
-		"Reading package lists... Building dependency tree... Reading state information... searchmonkey is already the newest"
+		"Reading package lists... Building dependency tree... Reading state information... texlive-xetex is already the newest"
 		"Reading package lists... Building dependency tree... Reading state information... The following packages were automatically"
         	"packages can be upgraded. Run 'apt list --upgradable' to see them."
         )
@@ -34,10 +58,10 @@ source test/helper.sh
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"		
 }
 
-@test "Checking searchmonkey version response." {
-	COMMAND_OUTPUT=$(apt show searchmonkey)
-	COMMAND_HEAD=${COMMAND_OUTPUT:0:21}
-	EXPECTED_OUTPUT="Package: searchmonkey"
+@test "Checking texlive_xetex version response." {
+	COMMAND_OUTPUT=$(apt show texlive-xetex)
+	COMMAND_HEAD=${COMMAND_OUTPUT:0:22}
+	EXPECTED_OUTPUT="Package: texlive-xetex"
 
 	assert_equal "$COMMAND_HEAD" "$EXPECTED_OUTPUT"
 }

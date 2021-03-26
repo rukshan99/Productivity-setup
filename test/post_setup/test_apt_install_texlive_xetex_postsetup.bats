@@ -24,9 +24,9 @@ source test/helper.sh
 }
 
 @test "running the apt install searchmonkey function in some file and verifying log output." {
-	LOG_ENDING=$(head -c 123 $LOG_LOCATION"apt_8_install_searchmonkey.txt")
+	LOG_ENDING=$(head -c 123 $LOG_LOCATION"apt_9_install_texlive_xetex.txt")
 	ALLOWED_RESULTS=("Reading package lists... Building dependency tree... Reading state information... All packages are up to date."
-		"Reading package lists... Building dependency tree... Reading state information... searchmonkey is already the newest"
+		"Reading package lists... Building dependency tree... Reading state information... texlive-xetex is already the newest"
 		"Reading package lists... Building dependency tree... Reading state information... The following packages were automatically"
         	"packages can be upgraded. Run 'apt list --upgradable' to see them."
         )
@@ -34,10 +34,10 @@ source test/helper.sh
 	assert_equal $(echo -n $TEST_RESULT | tail -c 4) "true"		
 }
 
-@test "Checking searchmonkey version response." {
-	COMMAND_OUTPUT=$(apt show searchmonkey)
-	COMMAND_HEAD=${COMMAND_OUTPUT:0:21}
-	EXPECTED_OUTPUT="Package: searchmonkey"
+@test "Checking texlive_xetex version response." {
+	COMMAND_OUTPUT=$(apt show texlive-xetex)
+	COMMAND_HEAD=${COMMAND_OUTPUT:0:22}
+	EXPECTED_OUTPUT="Package: texlive-xetex"
 
 	assert_equal "$COMMAND_HEAD" "$EXPECTED_OUTPUT"
 }

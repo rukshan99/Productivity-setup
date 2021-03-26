@@ -6,6 +6,7 @@ apt: openvpn3
 apt: privoxy
 apt: searchmonkey
 apt: signal
+apt: texlive-xetex
 installationType: snap
 snap: anki
 installationType: custom

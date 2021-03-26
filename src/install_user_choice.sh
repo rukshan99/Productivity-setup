@@ -8,6 +8,7 @@ source src/apt_openvpn3.sh
 source src/apt_privoxy.sh
 source src/apt_signal.sh
 source src/apt_searchmonkey.sh
+source src/apt_texlive_xetex.sh
 source src/snap_anki.sh
 
 install_user_choices() {
@@ -31,6 +32,8 @@ install_user_choices() {
 			$(install_searchmonkey) # install user choice: searchmonkey
 		elif [ "${selected_software_packages[i]}" == signal ]; then
 			$(install_signal) # install user choice: signal
+		elif [ "${selected_software_packages[i]}" == texlive-xetex ]; then
+			$(install_texlive_xetex) # install user choice: texlive_xetex
 		fi
 	done
 }
@@ -56,6 +59,8 @@ test_user_choice_installation() {
 			test_searchmonkey
 		elif [ "${selected_software_packages[i]}" == signal ]; then
 			test_signal
+		elif [ "${selected_software_packages[i]}" == texlive-xetex ]; then
+			test_texlive_xetex
 		fi
 	done
 }
