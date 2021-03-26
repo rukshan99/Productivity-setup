@@ -7,6 +7,7 @@ source src/apt_keepass2.sh
 source src/apt_openvpn3.sh
 source src/apt_privoxy.sh
 source src/apt_signal.sh
+source src/apt_searchmonkey.sh
 source src/snap_anki.sh
 
 install_user_choices() {
@@ -26,6 +27,8 @@ install_user_choices() {
 			$(install_openvpn3) # install user choice: openvpn3
 		elif [ "${selected_software_packages[i]}" == privoxy ]; then
 			$(install_privoxy) # install user choice: privoxy
+		elif [ "${selected_software_packages[i]}" == searchmonkey ]; then
+			$(install_searchmonkey) # install user choice: searchmonkey
 		elif [ "${selected_software_packages[i]}" == signal ]; then
 			$(install_signal) # install user choice: signal
 		fi
@@ -49,6 +52,8 @@ test_user_choice_installation() {
 			test_openvpn3
 		elif [ "${selected_software_packages[i]}" == privoxy ]; then
 			test_privoxy
+		elif [ "${selected_software_packages[i]}" == searchmonkey ]; then
+			test_searchmonkey
 		elif [ "${selected_software_packages[i]}" == signal ]; then
 			test_signal
 		fi

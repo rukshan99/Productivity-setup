@@ -4,6 +4,7 @@ apt: github
 apt: keepass2
 apt: openvpn3
 apt: privoxy
+apt: searchmonkey
 apt: signal
 installationType: snap
 snap: anki
