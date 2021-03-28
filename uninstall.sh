@@ -1,10 +1,21 @@
-# read hardcoded variables
-SOURCEDIR=$PWD
-source src/hardcoded_variables.txt
+#!/bin/bash
+. src/hardcoded_variables.txt
+. src/ask_user_choice.sh
+. src/uninstall_user_choice.sh
+. src/helper.sh
 
-# get installation dependent parameters
-LINUX_USERNAME=$(whoami)
-LINUX_GROUP=$(whoami)
-echo $LINUX_USERNAME
-IP=$(hostname -f)
-echo $IP
+# get list of all possible installation types and pass it to the prompt.
+function run_prompt_user_choice() {
+	supported_installation_categories=$(read_categories "supported")
+	selected_software_packages=$(prompt_user_choice "uninstall" $supported_installation_categories)
+	
+	echo "The selected_software_packages for uninstallation are:"
+	echo $selected_software_packages
+	
+	# install selected packages.
+	$(uninstall_user_choices)
+	
+	# test selected packages.
+	test_user_choice_uninstallation
+}
+run_prompt_user_choice "$@"

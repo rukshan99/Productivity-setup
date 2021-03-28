@@ -14,14 +14,15 @@ source src/apt_wine.sh
 source src/snap_anki.sh
 source src/snap_notepad_plus_plus.sh
 source src/custom_anaconda.sh
+source src/custom_uninstall_anaconda.sh
 
-install_user_choices() {
+uninstall_user_choices() {
 	selected_software_packages=($(read_software_packages "selected")) # outer brackets to store as list
 	
 	# loop through selected packages
 	for i in "${!selected_software_packages[@]}"; do
 		if [ "${selected_software_packages[i]}" == anaconda ]; then
-			$(install_anaconda) # install user choice: anaconda
+			$(uninstall_anaconda) # install user choice: anaconda
 		elif [ "${selected_software_packages[i]}" == anki ]; then
 			$(install_anki) # install user choice: anki
 		elif [ "${selected_software_packages[i]}" == autokey-gtk ]; then
@@ -50,13 +51,13 @@ install_user_choices() {
 	done
 }
 
-test_user_choice_installation() {
+test_user_choice_uninstallation() {
 	selected_software_packages=($(read_software_packages "selected")) # outer brackets to store as list
 	
 	# loop through selected packages
 	for i in "${!selected_software_packages[@]}"; do
 		if [ "${selected_software_packages[i]}" == anaconda ]; then
-			test_anaconda
+			test_anaconda_uninstallation
 		elif [ "${selected_software_packages[i]}" == anki ]; then
 			test_anki
 		elif [ "${selected_software_packages[i]}" == autokey-gtk ]; then

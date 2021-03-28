@@ -1,5 +1,5 @@
 # What is this? [![Build Status](https://travis-ci.org/a-t-0/Taskwarrior-installation.svg?branch=refactor_to_shell)](https://travis-ci.org/a-t-0/Taskwarrior-installation)
-This is a thoroughly tested set of bash scripts that automatically install an opinonated developer setup on Ubuntu 20.04 with an **emphasis** on productivity and focus. It empowers the user to select actively which information the user wants to consume by fencing off undesired digital tempations. It is opinionated in the sence that it blocks all social media, youtube, image searches, news sites and adult content. Not because I think they are bad, instead it is because I am highly passionate about the opportunities that I am given and I want to give those opportunities and pursuits my complete dedication.
+This is a thoroughly tested set of bash scripts that automatically install an opinonated student/developer setup on Ubuntu 20.04 with an **emphasis** on productivity and focus. It empowers the user to select actively which information the user wants to consume by fencing off undesired digital tempations. It is opinionated in the sence that it blocks all social media, youtube, image searches, news sites and adult content. Not because I think they are bad, instead it is because I am highly passionate about the opportunities that I am given and I want to give those opportunities and pursuits my complete dedication.
 
 ## Usage: Installation (Currently only testing works)
 Install git and download this repository:
@@ -10,7 +10,7 @@ git clone https://github.com/HiveMinds-EU/Productivity-setup
 ```
 Run the main code from the root of this repository with:
 ```
-./src/main.sh
+./main.sh
 ```
 Uninstall it with:
 ```
@@ -28,7 +28,7 @@ chmod +x install-bats-libs.sh
 Next, run the unit tests with:
 ```
 chmod +x test.sh
-sudo ./test.sh
+./test.sh
 ```
 Note: Put your unit test files (with extention .bats) in folder: `/test/`
 

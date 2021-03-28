@@ -13,5 +13,6 @@ installationType: snap
 snap: anki
 snap: notepad++
 installationType: custom
+custom: anaconda
 installationType: needUserInput
 installationType: deviceDependent

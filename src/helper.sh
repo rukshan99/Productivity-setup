@@ -50,12 +50,12 @@ append_to_log() {
 }
 
 remove_logs() {
-	rm -r src/logs/*
+	sudo rm -r src/logs/*
 }
 
 remove_log_file() {
 	log_filename=$1
-	rm -r src/logs/$log_filename
+	sudo rm -r src/logs/$log_filename
 }
 remove_log_file "$@"
 

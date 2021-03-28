@@ -38,6 +38,10 @@ read_software_packages_per_category() {
 }
 
 prompt_user_choice() {
+	# determine whether the user is installing or uninstalling
+	activity=$1
+	shift # eat first argument
+	
 	# read incoming list of installation types that are tested
 	installation_types=("$@")
 	
@@ -68,7 +72,7 @@ prompt_user_choice() {
 		for j in "${!new_software_list[@]}"; do
 		
 			# Ask the user if they want to install this software package
-			user_input=$(ask_if_user_wants_some_software_package ${new_software_list[j]})
+			user_input=$(ask_if_user_wants_some_software_package $activity ${new_software_list[j]})
 			
 			# add the software package to the list or not, depending on user choice
 			if [ $(echo -n $user_input | tail -c 4) == true ]; then
@@ -89,10 +93,15 @@ prompt_user_choice() {
 }
 
 ask_if_user_wants_some_software_package() {
-	software_package=$1
+	activity=$1
+	software_package=$2
 	if [ ${#software_package} -ge 1 ]; then
 		while true; do
-		    read -p "Do you wish to install: $software_package?" yn
+			if [ "$activity" == "install" ]; then
+				read -p "Do you wish to install: $software_package?" yn
+			elif [ "$activity" == "uninstall" ]; then
+				read -p "Do you wish to uninstall: $software_package?" yn
+		    fi
 		    case $yn in
 			[Yy]* ) echo "true"; break;;
 			[Nn]* ) echo "false"; break;;
